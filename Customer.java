@@ -1,4 +1,4 @@
-
+import java.io.Serializable;
 
 /**
  * This class is responsible for storing information of each client
@@ -7,12 +7,13 @@
  * 
  */
 
-public class Customer {
+public class Customer implements Serializable {
 
 	/**
 	 * Attributes of the client including a unique id number, first name, last name,
 	 * address, postal code, phone number, and client type
 	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String fName;
 	private String lName;
@@ -21,6 +22,8 @@ public class Customer {
 	private String phoneNum;
 	private char clientType;
 
+	public Customer () {}
+	
 	/**
 	 * Constructs a client object
 	 * 

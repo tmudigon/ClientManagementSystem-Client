@@ -10,17 +10,17 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class WriteObject {
-	private ObjectOutputStream objectOut = null;
-	private Message theMessage;
-	private Scanner stdin = null;
-	private Scanner textFileIn = null;
-	private Socket theClient = null;
+	private ObjectOutputStream objectOut;
+//	private Message theMessage;
+//	private Scanner stdin = null;
+//	private Scanner textFileIn = null;
+//	private Socket theClient = null;
 
 	/**
 	 * Creates an blank MusicRecord object
 	 */
 	public WriteObject(Socket theClient) {
-		this.theClient = theClient;
+		//this.theClient = theClient;
 		try {
 			objectOut = new ObjectOutputStream(theClient.getOutputStream());
 		} catch (IOException e) {

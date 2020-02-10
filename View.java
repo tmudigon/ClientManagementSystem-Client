@@ -422,6 +422,10 @@ public class View extends JFrame {
 	public void displaySuccessMessage() {
 		JOptionPane.showMessageDialog(null, "The action has been performed successfully.");
 	}
+	
+	public void displayMessage(String message) {
+		JOptionPane.showMessageDialog(null, message);
+	}
 
 	/**
 	 * displays a failure message to the user
