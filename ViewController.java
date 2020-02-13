@@ -87,7 +87,7 @@ public class ViewController {
 				theView.getSearchResultList().clearSelection();
 				if (searchParam != null) {
 					try {
-						
+						Integer.parseInt(searchParam);
 						Message theMessage = new Message();
 						theMessage.setChoice(1);
 						theMessage.setData(searchParam);
@@ -230,7 +230,7 @@ public class ViewController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			boolean update = false;
+			//boolean update = false;
 			int id = 0;
 
 			try {
@@ -264,12 +264,12 @@ public class ViewController {
 					//update = theModel.updateClientInfo(id, fName, lName, address, postalCod, phoneNum, clientType);
 				}
 			}
-
-			if (update) {
-				theView.displaySuccessMessage();
-			} else {
-				theView.displayFailureMessage();
-			}
+//
+//			if (update) {
+//				theView.displaySuccessMessage();
+//			} else {
+//				theView.displayFailureMessage();
+//			}
 		}
 	}
 
@@ -290,7 +290,7 @@ public class ViewController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-//			try {
+			try {
 				int id = Integer.parseInt(theView.getTfClientId().getText());
 				
 				Customer c = new Customer();
@@ -309,7 +309,9 @@ public class ViewController {
 //				} else {
 //					theView.displayFailureMessage();
 //				}
-//			} catch (NumberFormatException excep) {	}
+			} catch (NumberFormatException excep) {	
+				theView.displayFillMessage();
+			}
 		}
 	}
 //
@@ -380,6 +382,7 @@ public class ViewController {
 					theMessage.setChoice(4);
 					theMessage.setData(null);
 					theClient.sendMessage(theMessage);
+					System.out.println("Adding client..");
 				}
 			}
 //			if (addNew) {

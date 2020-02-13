@@ -14,13 +14,13 @@ public class ClientApp {
 		View theView = new View();
 		System.out.println("Client created");
 		ClientController theClient = new ClientController("localhost", 9090, theView);
-		ViewController viewController = new ViewController(theClient, theView);
+		//ViewController viewController = new ViewController(theClient, theView);
 
 		theView.setVisible(true);
 		theView.pack();
 		
 		//Getting the action listener count 
-		//Below code prints twice, so it means that the action listener is added twice?
+		//Below code prints two, so it means that the action listener is added twice?
 		System.out.println("The search button is called: "+theView.getBtnSearch().getActionListeners().length);
 
 		theClient.getServerResponse();
