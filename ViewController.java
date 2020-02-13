@@ -18,8 +18,9 @@ public class ViewController {
 
 	private ClientController theClient;
 	private View theView;
-	private Message theMessage;
+	//private Message theMessage;
 	private ValidateInput validateInput;
+	private ArrayList<Customer> custList = new ArrayList <Customer>();
 
 	/**
 	 * Constructs a controller object
@@ -30,7 +31,7 @@ public class ViewController {
 	public ViewController(ClientController theClient, View theView) {
 		this.theClient = theClient;
 		this.theView = theView;
-		theMessage = new Message();
+		//theMessage = new Message();
 		validateInput = new ValidateInput(theView);
 		theView.addSearchListener(new SearchListener());
 		theView.addClearSearchListener(new ClearSearchListener());
@@ -81,13 +82,15 @@ public class ViewController {
 			String searchParam = null;
 			searchParam = theView.getClientSearchTextField();
 			//ArrayList<Customer> selectedList;
-			theMessage.setData(searchParam);
+			//theMessage.setData(searchParam);
 
 			if (theView.getRdbtnClientId().isSelected()) {
 				theView.getSearchResultList().clearSelection();
 				if (searchParam != null) {
 					try {
-						theMessage.setChoice(1);
+						
+						Message theMessage = new Message(custList, 1, searchParam);
+						//theMessage.setChoice(1);
 						theClient.sendMessage(theMessage);
 						// selectedList = theModel.searchByClientId(Integer.parseInt(searchParam));
 						// addToListModel(selectedList);
@@ -101,8 +104,11 @@ public class ViewController {
 			else if (theView.getRdbtnLastName().isSelected()) {
 				if (searchParam != null) {
 					theView.getSearchResultList().clearSelection();
-					theMessage.setChoice(2);
+					//theMessage.setChoice(2);
+					
+					Message theMessage = new Message(custList, 2, searchParam);
 					theClient.sendMessage(theMessage);
+					
 					// selectedList = theModel.searchByClientName(searchParam);
 					// addToListModel(selectedList);
 				} else
@@ -113,7 +119,8 @@ public class ViewController {
 				theView.getSearchResultList().clearSelection();
 				if (searchParam != null) {
 					try {
-						theMessage.setChoice(3);
+						//theMessage.setChoice(3);
+						Message theMessage = new Message(custList, 3, searchParam);
 						theClient.sendMessage(theMessage);
 						// selectedList =
 						// theModel.searchByClientType(searchParam.toUpperCase().charAt(0));
@@ -244,6 +251,7 @@ public class ViewController {
 
 				if (validateInput.validateInput(fName, lName, address, postalCod, phoneNum)) {
 					Customer c = new Customer(id, fName, lName, address, postalCod, phoneNum, clientType);
+					Message theMessage = new Message();
 					theMessage.getCustomerList().add(c);
 					theMessage.setChoice(5);
 					theMessage.setData(null);
@@ -283,6 +291,7 @@ public class ViewController {
 				Customer c = new Customer();
 				c.setId(id);
 				
+				Message theMessage = new Message();
 				theMessage.getCustomerList().add(c);
 				theMessage.setChoice(6);
 				theMessage.setData(null);
@@ -361,6 +370,7 @@ public class ViewController {
 					Customer c = new Customer(defaultId, fName, lName, address, postalCod, phoneNum, clientType);
 					//addNew = theModel.addClient(c);
 					
+					Message theMessage = new Message();
 					theMessage.getCustomerList().add(c);
 					theMessage.setChoice(4);
 					theMessage.setData(null);

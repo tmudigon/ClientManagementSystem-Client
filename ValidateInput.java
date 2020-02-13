@@ -79,7 +79,7 @@ public class ValidateInput {
 	}
 
 	/**
-	 * Validates that the user input for addresss is less than the maximum numer of
+	 * Validates that the user input for address is less than the maximum number of
 	 * characters
 	 * 
 	 * @param address address

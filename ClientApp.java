@@ -19,15 +19,9 @@ public class ClientApp {
 		theView.setVisible(true);
 		theView.pack();
 		
-		theClient.sendMessage(new Message(null, 1, "7"));
-		theClient.sendMessage(new Message(null, 3, "r"));
-		theClient.sendMessage(new Message(null, 2, "Mudigonda"));
-		
 		//Getting the action listener count 
 		//Below code prints twice, so it means that the action listener is added twice?
 		System.out.println("The search button is called: "+theView.getBtnSearch().getActionListeners().length);
-
-
 
 		theClient.getServerResponse();
 	}
