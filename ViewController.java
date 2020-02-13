@@ -20,7 +20,6 @@ public class ViewController {
 	private View theView;
 	//private Message theMessage;
 	private ValidateInput validateInput;
-	private ArrayList<Customer> custList = new ArrayList <Customer>();
 
 	/**
 	 * Constructs a controller object
@@ -89,8 +88,9 @@ public class ViewController {
 				if (searchParam != null) {
 					try {
 						
-						Message theMessage = new Message(custList, 1, searchParam);
-						//theMessage.setChoice(1);
+						Message theMessage = new Message();
+						theMessage.setChoice(1);
+						theMessage.setData(searchParam);
 						theClient.sendMessage(theMessage);
 						// selectedList = theModel.searchByClientId(Integer.parseInt(searchParam));
 						// addToListModel(selectedList);
@@ -104,9 +104,11 @@ public class ViewController {
 			else if (theView.getRdbtnLastName().isSelected()) {
 				if (searchParam != null) {
 					theView.getSearchResultList().clearSelection();
-					//theMessage.setChoice(2);
 					
-					Message theMessage = new Message(custList, 2, searchParam);
+					
+					Message theMessage = new Message();
+					theMessage.setChoice(2);
+					theMessage.setData(searchParam);
 					theClient.sendMessage(theMessage);
 					
 					// selectedList = theModel.searchByClientName(searchParam);
@@ -119,8 +121,10 @@ public class ViewController {
 				theView.getSearchResultList().clearSelection();
 				if (searchParam != null) {
 					try {
-						//theMessage.setChoice(3);
-						Message theMessage = new Message(custList, 3, searchParam);
+						
+						Message theMessage = new Message();
+						theMessage.setChoice(3);
+						theMessage.setData(searchParam);
 						theClient.sendMessage(theMessage);
 						// selectedList =
 						// theModel.searchByClientType(searchParam.toUpperCase().charAt(0));
@@ -251,6 +255,7 @@ public class ViewController {
 
 				if (validateInput.validateInput(fName, lName, address, postalCod, phoneNum)) {
 					Customer c = new Customer(id, fName, lName, address, postalCod, phoneNum, clientType);
+					
 					Message theMessage = new Message();
 					theMessage.getCustomerList().add(c);
 					theMessage.setChoice(5);
