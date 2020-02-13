@@ -1,5 +1,4 @@
 
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,18 +8,21 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * This class is responsible for creating an object output stream to write
+ * objects to the client socket
+ * 
+ * @author Thanmayee Mudigonda & Sourabh Mokhasi
+ * 
+ */
 public class WriteObject {
 	private ObjectOutputStream objectOut;
-//	private Message theMessage;
-//	private Scanner stdin = null;
-//	private Scanner textFileIn = null;
-//	private Socket theClient = null;
 
 	/**
-	 * Creates an blank MusicRecord object
+	 * Creates an blank WriteObject object
 	 */
 	public WriteObject(Socket theClient) {
-		//this.theClient = theClient;
+		// this.theClient = theClient;
 		try {
 			objectOut = new ObjectOutputStream(theClient.getOutputStream());
 		} catch (IOException e) {
@@ -29,13 +31,15 @@ public class WriteObject {
 	}
 
 	/**
-	 * Sends the Message object to the client.
+	 * Sends the Message object to the client, by writing it to the object output
+	 * stream on the client socket
 	 */
 	public void sendObject(Message theMessage) {
 		try {
 			objectOut.writeObject(theMessage);
-			// Reset the buffer everytime an object is written.
-			objectOut.reset();
+			System.out.println("sending object");
+			// Reset the buffer every time an object is written.
+			//objectOut.reset();
 		} catch (IOException e) {
 			System.out.println("Error writing object!");
 		} catch (NoSuchElementException e) {

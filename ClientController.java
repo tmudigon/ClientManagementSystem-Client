@@ -5,66 +5,77 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
-
+/**
+ * This class is responsible for setting up the socket connection and
+ * communication between the client and the server
+ * 
+ * @author Thanmayee Mudigonda & Sourabh Mokhasi
+ *
+ */
 public class ClientController {
 
 	private Socket aSocket;
-	//private PrintWriter socketOut;
-	//private BufferedReader socketIn;
 	private ReadObject readObject;
 	private WriteObject writeObject;
 	private View theView;
 	private Message theMessage;
 	private ViewController viewController;
 
+	/**
+	 * Constructs a ClientController instance
+	 * 
+	 * @param serverName
+	 * @param portNumber
+	 * @param theView
+	 */
 	public ClientController(String serverName, int portNumber, View theView) {
 		this.theView = theView;
 		try {
 			aSocket = new Socket(serverName, portNumber);
-			// Socket input Stream
-		//	socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
-
 			// Socket output Stream
-		//	socketOut = new PrintWriter(aSocket.getOutputStream(), true);
 			writeObject = new WriteObject(aSocket);
+			// Socket input stream
 			readObject = new ReadObject(aSocket);
-			
-			viewController = new ViewController(this,theView);
+			viewController = new ViewController(this, theView);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
 	/**
-	 * 
+	 * This is a method that runs continuously and reads from the input stream of
+	 * the socket. As soon as there is an object in the socket, this method parses
+	 * and sends it over to the switch board
 	 */
 	public void getServerResponse() {
-		while(true) {
+		while (true) {
 			theMessage = readObject.readMessage();
-			if(theMessage != null) {
+			if (theMessage != null) {
 				System.out.println("Server response is: " + theMessage.getChoice());
-				switchBoard(theMessage.getChoice(),theMessage);
+				switchBoard(theMessage.getChoice(), theMessage);
 			}
 		}
 	}
-	
+
 	public void sendMessage(Message theMessage) {
-		if(theMessage != null) {
+		if (theMessage != null) {
 			writeObject.sendObject(theMessage);
-		} 
+		}
 	}
-	
+
 	/**
-	 * This switch Board is only for reading server response
+	 * This switch board receives the server response and updates the client view
+	 * with the response
+	 * 
 	 * @param choice
 	 * @param customerList
 	 */
-	public void switchBoard(int choice,Message theMessage) {
-		switch (choice) { 
+	public void switchBoard(int choice, Message theMessage) {
+		switch (choice) {
 		case 1:
-			//This case will be triggered after receiving a message from server with choice 1
+			// This case will be triggered after receiving a message from server with choice
+			// 1
 			// search by ID
 			viewController.addToListModel(theMessage.getCustomerList());
 			break;
@@ -89,8 +100,8 @@ public class ClientController {
 			theView.displayMessage(theMessage.getData());
 			break;
 		default:
+			System.out.println("Invalid choice");
 			// Default
-	}
+		}
 	}
 }
-

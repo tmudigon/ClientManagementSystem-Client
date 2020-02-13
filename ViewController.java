@@ -6,16 +6,6 @@ import java.util.ArrayList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-//import Controller.Controller.ClearListener;
-//import Controller.Controller.ClearSearchListener;
-//import Controller.Controller.DeleteListener;
-//import Controller.Controller.ListListener;
-//import Controller.Controller.NewClientListener;
-//import Controller.Controller.SaveListener;
-//import Controller.Controller.SearchListener;
-//import Model.Client;
-//import Model.ValidateClient;
-//import View.GUIBuilder2;
 
 /**
  * This class is responsible for connecting the model and the view packages This
@@ -31,6 +21,12 @@ public class ViewController {
 	private Message theMessage;
 	private ValidateInput validateInput;
 
+	/**
+	 * Constructs a controller object
+	 * 
+	 * @param theClient client controller object
+	 * @param frame view object
+	 */
 	public ViewController(ClientController theClient, View theView) {
 		this.theClient = theClient;
 		this.theView = theView;
@@ -46,32 +42,11 @@ public class ViewController {
 	}
 
 	/**
-	 * object of the model
+	 * This method displays the appropriate list to the user based on the search
+	 * parameter
+	 * 
+	 * @param selectedList list to be displayed to user
 	 */
-//	private ValidateClient theModel;
-//	/**
-//	 * object of the view
-//	 */
-//	private View theView;
-//
-//	/**
-//	 * Constructs a controller object
-//	 * 
-//	 * @param model model object
-//	 * @param frame view object
-//	 */
-//	public ViewController(ValidateClient model, GUIBuilder2 frame) {
-//		this.theModel = model;
-//		this.theView = frame;
-//		theView.addSearchListener(new SearchListener());
-//		theView.addClearSearchListener(new ClearSearchListener());
-//		theView.addListListener(new ListListener());
-//		theView.addSaveListener(new SaveListener());
-//		theView.addDeleteListener(new DeleteListener());
-//		theView.addClearListener(new ClearListener());
-//		theView.addNewClientListener(new NewClientListener());
-//	}
-	
 	public void addToListModel(ArrayList<Customer> customerList) {
 		if (customerList.size() != 0) {
 			theView.setSearchResultList(customerList.toArray());
@@ -101,6 +76,8 @@ public class ViewController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
+		    System.out.println("Event hashcode:"+System.identityHashCode(e));
+
 			String searchParam = null;
 			searchParam = theView.getClientSearchTextField();
 			//ArrayList<Customer> selectedList;
@@ -155,12 +132,6 @@ public class ViewController {
 		}
 	}
 
-		/**
-		 * This method displays the appropriate list to the user based on the search
-		 * parameter
-		 * 
-		 * @param selectedList list to be displayed to user
-		 */
 //		public void addToListModel(ArrayList<Customer> selectedList) {
 //			if (selectedList.size() != 0) {
 //				theView.setSearchResultList(selectedList.toArray());
@@ -370,7 +341,7 @@ public class ViewController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			boolean addNew = false;
+			//boolean addNew = false;
 
 			String fName = theView.getTfFirstName().getText();
 			String lName = theView.getTfLastName().getText();
